@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BitcoinYield Pro - AI DeFi Yield Optimization</title>
+    
+    <!-- Meta tags for SEO and social sharing -->
+    <meta name="description" content="AI-powered DeFi yield optimization platform for Bitcoin and CoreDAO ecosystem. Maximize your crypto yields with intelligent portfolio allocation.">
+    <meta name="keywords" content="bitcoin, defi, yield, core, blockchain, ai, optimization">
+    <meta property="og:title" content="BitcoinYield Pro - AI DeFi Yield Optimization">
+    <meta property="og:description" content="Maximize your crypto yields with AI-powered portfolio optimization">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>₿</text></svg>">
+    
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js"></script>
+    
+    <!-- Local Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading" class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fab fa-bitcoin"></i>
+            </div>
+            <h2>BitcoinYield Pro</h2>
+            <p>Initializing AI optimization engine...</p>
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fab fa-bitcoin"></i>
+                    <span>BitcoinYield Pro</span>
+                </div>
+                <div class="header-actions">
+                    <div class="market-ticker">
+                        <span class="ticker-item">
+                            <i class="fab fa-bitcoin"></i>
+                            <span id="btc-price">$45,000</span>
+                        </span>
+                        <span class="ticker-item">
+                            <span class="core-logo">CORE</span>
+                            <span id="core-apy">12.8%</span>
+                        </span>
+                    </div>
+                    <button class="connect-wallet-btn" onclick="connectWallet()">
+                        <i class="fas fa-wallet"></i>
+                        <span>Connect Wallet</span>
+                    </button>
+                    <button class="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="main-nav">
+            <div class="nav-menu">
+                <button class="tab-btn active" onclick="showTab('dashboard')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </button>
+                <button class="tab-btn" onclick="showTab('optimize')">
+                    <i class="fas fa-robot"></i>
+                    <span>AI Optimize</span>
+                </button>
+                <button class="tab-btn" onclick="showTab('portfolio')">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Portfolio</span>
+                </button>
+                <button class="tab-btn" onclick="showTab('markets')">
+                    <i class="fas fa-coins"></i>
+                    <span>Markets</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="dashboard-grid">
+                    <!-- Portfolio Overview -->
+                    <div class="card portfolio-overview">
+                        <div class="card-header">
+                            <h3>Portfolio Overview</h3>
+                            <div class="portfolio-value">
+                                <span class="value" id="portfolioValue">$12,450.50</span>
+                                <span class="change positive">+8.2% (24h)</span>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="portfolioChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Yield Performance -->
+                    <div class="card yield-performance">
+                        <div class="card-header">
+                            <h3>Yield Performance</h3>
+                            <div class="chart-controls">
+                                <button class="chart-btn active" onclick="updateChart('7d')">7D</button>
+                                <button class="chart-btn" onclick="updateChart('30d')">30D</button>
+                                <button class="chart-btn" onclick="updateChart('90d')">90D</button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="yieldChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    <div class="card quick-stats">
+                        <h3>Quick Stats</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-percentage"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-label">Current APY</span>
+                                    <span class="stat-value">11.8%</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-coins"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-label">Monthly Yield</span>
+                                    <span class="stat-value">$122.50</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-label">Risk Score</span>
+                                    <span class="stat-value">4.2/10</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                                <div class="stat-info">
+                                    <span class="stat-label">Protocols</span>
+                                    <span class="stat-value">4</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="card recent-activity">
+                        <div class="card-header">
+                            <h3>Recent Activity</h3>
+                            <button class="export-btn" onclick="exportPortfolio()">
+                                <i class="fas fa-download"></i>
+                                Export
+                            </button>
+                        </div>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon deposit">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <div class="activity-info">
+                                    <span class="activity-title">CoreDAO Staking Reward</span>
+                                    <span class="activity-time">2 hours ago</span>
+                                </div>
+                                <span class="activity-amount positive">+$42.50</span>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon trade">
+                                    <i class="fas fa-exchange-alt"></i>
+                                </div>
+                                <div class="activity-info">
+                                    <span class="activity-title">LP Token Swap</span>
+                                    <span class="activity-time">5 hours ago</span>
+                                </div>
+                                <span class="activity-amount">0.002 BTC</span>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon deposit">
+                                    <i class="fas fa-arrow-up"></i>
+                                </div>
+                                <div class="activity-info">
+                                    <span class="activity-title">Bridge Yield</span>
+                                    <span class="activity-time">1 day ago</span>
+                                </div>
+                                <span class="activity-amount positive">+$18.20</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Optimize Tab -->
+            <div id="optimize" class="tab-content">
+                <div class="optimize-container">
+                    <div class="card optimization-form">
+                        <div class="card-header">
+                            <h3>
+                                <i class="fas fa-robot"></i>
+                                AI Portfolio Optimizer
+                            </h3>
+                            <p>Let our AI find the optimal yield strategy for your investment</p>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="investAmount">Investment Amount ($)</label>
+                            <div class="input-group">
+                                <span class="input-prefix">$</span>
+                                <input type="number" id="investAmount" placeholder="10000" min="100" step="100">
+                            </div>
+                            <small class="form-hint">Minimum investment: $100</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="riskSlider">Risk Tolerance</label>
+                            <div class="risk-slider-container">
+                                <input type="range" id="riskSlider" min="1" max="10" value="5">
+                                <div class="risk-labels">
+                                    <span>Conservative</span>
+                                    <span>Moderate</span>
+                                    <span>Aggressive</span>
+                                </div>
+                                <div class="risk-display">
+                                    <span id="riskValue">5</span>/10 - 
+                                    <span id="riskLabel">Moderate</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="optimize-btn" onclick="optimizePortfolio()">
+                            <i class="fas fa-magic"></i>
+                            Optimize Portfolio
+                        </button>
+                    </div>
+
+                    <!-- Optimization Results -->
+                    <div id="optimizationResult" class="card optimization-result" style="display: none;">
+                        <div class="card-header">
+                            <h3>
+                                <i class="fas fa-chart-bar"></i>
+                                Optimized Portfolio
+                            </h3>
+                            <div class="result-summary">
+                                <div class="summary-item">
+                                    <span class="summary-label">Expected APY</span>
+                                    <span class="summary-value" id="expectedAPY">12.5%</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Risk Score</span>
+                                    <span class="summary-value" id="riskScore">4.2/10</span>
+                                </div>
+                                <div class="summary-item">
+                                    <span class="summary-label">Monthly Yield</span>
+                                    <span class="summary-value" id="monthlyYield">$104.17</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="allocation-container">
+                            <h4>Recommended Allocation</h4>
+                            <div id="allocationGrid" class="allocation-grid">
+                                <!-- Allocation items will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Portfolio Tab -->
+            <div id="portfolio" class="tab-content">
+                <div class="portfolio-container">
+                    <div class="card portfolio-positions">
+                        <div class="card-header">
+                            <h3>Current Positions</h3>
+                            <div class="portfolio-actions">
+                                <button class="action-btn" onclick="rebalancePortfolio()">
+                                    <i class="fas fa-balance-scale"></i>
+                                    Rebalance
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="positions-list">
+                            <div class="position-item">
+                                <div class="position-info">
+                                    <div class="position-protocol">
+                                        <span class="protocol-name">CoreDAO Staking</span>
+                                        <span class="protocol-type">Native Staking</span>
+                                    </div>
+                                </div>
+                                <div class="position-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">Amount</span>
+                                        <span class="metric-value">$4,980</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">APY</span>
+                                        <span class="metric-value">12.8%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">24h P&L</span>
+                                        <span class="metric-value positive">+$42.50</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="position-item">
+                                <div class="position-info">
+                                    <div class="position-protocol">
+                                        <span class="protocol-name">Bitcoin Bridge</span>
+                                        <span class="protocol-type">Cross-chain</span>
+                                    </div>
+                                </div>
+                                <div class="position-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">Amount</span>
+                                        <span class="metric-value">$3,735</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">APY</span>
+                                        <span class="metric-value">8.5%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">24h P&L</span>
+                                        <span class="metric-value positive">+$18.20</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="position-item">
+                                <div class="position-info">
+                                    <div class="position-protocol">
+                                        <span class="protocol-name">CORE-BTC LP</span>
+                                        <span class="protocol-type">Liquidity Pool</span>
+                                    </div>
+                                </div>
+                                <div class="position-metrics">
+                                    <div class="metric">
+                                        <span class="metric-label">Amount</span>
+                                        <span class="metric-value">$2,490</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">APY</span>
+                                        <span class="metric-value">15.2%</span>
+                                    </div>
+                                    <div class="metric">
+                                        <span class="metric-label">24h P&L</span>
+                                        <span class="metric-value negative">-$8.50</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Markets Tab -->
+            <div id="markets" class="tab-content">
+                <div class="markets-container">
+                    <div class="card markets-overview">
+                        <div class="card-header">
+                            <h3>DeFi Markets</h3>
+                            <div class="market-filters">
+                                <button class="filter-btn active">All</button>
+                                <button class="filter-btn">Staking</button>
+                                <button class="filter-btn">Lending</button>
+                                <button class="filter-btn">LP</button>
+                            </div>
+                        </div>
+                        
+                        <div class="markets-list">
+                            <div class="market-item">
+                                <div class="market-info">
+                                    <span class="market-name">CoreDAO Staking</span>
+                                    <span class="market-type">Native Staking</span>
+                                </div>
+                                <div class="market-metrics">
+                                    <span class="market-apy">12.8% APY</span>
+                                    <span class="market-tvl">$125M TVL</span>
+                                    <span class="market-risk risk-low">Low Risk</span>
+                                </div>
+                            </div>
+
+                            <div class="market-item">
+                                <div class="market-info">
+                                    <span class="market-name">CORE-BTC LP</span>
+                                    <span class="market-type">Liquidity Pool</span>
+                                </div>
+                                <div class="market-metrics">
+                                    <span class="market-apy">15.2% APY</span>
+                                    <span class="market-tvl">$45M TVL</span>
+                                    <span class="market-risk risk-medium">Med Risk</span>
+                                </div>
+                            </div>
+
+                            <div class="market-item">
+                                <div class="market-info">
+                                    <span class="market-name">Lightning Yield</span>
+                                    <span class="market-type">Lightning Network</span>
+                                </div>
+                                <div class="market-metrics">
+                                    <span class="market-apy">6.8% APY</span>
+                                    <span class="market-tvl">$210M TVL</span>
+                                    <span class="market-risk risk-low">Low Risk</span>
+                                </div>
+                            </div>
+
+                            <div class="market-item">
+                                <div class="market-info">
+                                    <span class="market-name">Cross-Chain Pool</span>
+                                    <span class="market-type">Multi-chain</span>
+                                </div>
+                                <div class="market-metrics">
+                                    <span class="market-apy">18.5% APY</span>
+                                    <span class="market-tvl">$23M TVL</span>
+                                    <span class="market-risk risk-high">High Risk</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
